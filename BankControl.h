@@ -98,12 +98,20 @@ public:
                     cin >> receiverId;
                     Client *receiverClient;
                     receiverClient = FileManager::searchForClient(receiverId);
-                    singletonClient->transferMoney(transferValue, receiverClient);
-                    FileManager::updateClient(singletonClient);
-                    //FileManager::updateClient(receiverClient);
+                    if (receiverClient != NULL)
+                    {
+                        singletonClient->transferMoney(transferValue, receiverClient);
+                        FileManager::updateClient(singletonClient);
+                        //FileManager::updateClient(receiverClient);
+                        system("cls");
+                        cout << "DONE ! ^_^" << endl;
+                    }
+                    else
+                    {
+                        system("cls");
+                        cout << "SORRY THERE IS NO CLIENT WITH THIS ID" << endl;
+                    }
 
-                    system("cls");
-                    cout << "DONE ! ^_^" << endl;
                     break;
                 case 5:
                     system("cls");
@@ -111,7 +119,7 @@ public:
                     break;
                 case 6:
                     system("cls");
-                    //singletonClient->logout();
+                    BankControl::loginScreen();
                     break;
 
                 default:
