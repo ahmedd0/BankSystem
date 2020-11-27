@@ -10,7 +10,7 @@
 using namespace std;
 int main()
 {
-	
+	Menu::welcomeScreen();
 	BankControl::loginScreen();
 
 	return 0;

@@ -164,8 +164,8 @@ public:
                     system("cls");
                     cout << "PLEASE ENTER ACCOUNT ID" << endl;
                     int idForSearch;
-                    Client *searchResult;
                     cin >> idForSearch;
+                    Client *searchResult;
                     searchResult = FileManager::searchForClient(idForSearch);
                     if (searchResult != NULL)
                     {

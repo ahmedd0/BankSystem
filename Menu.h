@@ -21,10 +21,25 @@ private:
 public:
     static void welcomeScreen()
     {
-        cout << "============================================" << endl;
-        cout << "===        Welcome to Bank System        ===" << endl;
-        cout << "============================================" << endl;
+        cout << endl
+             << endl
+             << endl
+             << endl
+             << endl
+             << endl
+             << endl
+             << endl
+             << endl;
+        cout << "                                   ============================================" << endl;
+        cout << "                                   ===                                       ===" << endl;
+        cout << "                                   ===                                       ===" << endl;
+        cout << "                                   ===        Welcome to Bank System         ===" << endl;
+        cout << "                                   ===            ROUTE CYCLE (11)           ===" << endl;
+        cout << "                                   ===                                       ===" << endl;
+        cout << "                                   ===                                       ===" << endl;
+        cout << "                                   ============================================" << endl;
         sleep(3);
+        system("cls");
     }
 
     static int loginScreen()

@@ -1,5 +1,6 @@
 #ifndef EMPLOYEE_H
 #define EMPLOYEE_H
+
 #include "Person.h"
 #include "Client.h"
 #include <map>
@@ -78,10 +79,6 @@ public:
 	void deactivateClient(Client *client)
 	{
 		client->setClientActive(false);
-	}
-	//------------------------- SEARCH FOR AN CLIENT BY ID
-	void search()
-	{
 	}
 	void changePassword(string password)
 	{
