@@ -5,6 +5,7 @@
 #include <map>
 #include <iostream>
 #include <string>
+#include "Admin.h"
 using namespace std;
 
 class FileManager
@@ -429,6 +430,42 @@ public:
         lastEmployeeId.open("employeeId.txt", ios::out);
         lastEmployeeId << lastId;
         lastEmployeeId.close();
+    }
+    // Admin
+    static Admin *searchForAdmin(int id)
+    {
+        fstream admins;
+        // open client file
+        admins.open("admin.txt", ios::in);
+        // FILE VARIABLE
+        int adminId;
+        string firstName;
+        string lastName;
+        string nationalId;
+        string password;
+        double sallary;
+        int err = 0;
+        Admin *admin;
+        //LOOP THROUGH FILE
+        while (admins >> adminId >> firstName >> lastName >> nationalId >> password >> sallary)
+        {
+
+            if (adminId == id)
+            {
+                // CREATE OBJECT (CLIENT)
+                admin = new Admin(firstName, lastName, nationalId, password, sallary);
+                admin->setId(adminId);
+                err++;
+            }
+        }
+        if (err == 0)
+        {
+            return NULL;
+        }
+        else
+        {
+            return admin;
+        }
     }
 };
 

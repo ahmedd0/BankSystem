@@ -11,37 +11,31 @@ public:
 	Admin()
 	{
 	}
-	Admin(string firstName, string lastName, string nationalId,string password ,double salary)
-		: Employee(firstName, lastName, nationalId,password, salary)
+	Admin(string firstName, string lastName, string nationalId, string password, double salary)
+		: Employee(firstName, lastName, nationalId, password, salary)
 	{
 	}
 	//--------------------- Create Employee
-	void createEmployee(string firstName, string lastName, string nationalId,string password ,double sallary)
+	Employee *createEmployee(string firstName, string lastName, string nationalId, string password, double sallary)
 	{
-		Employee *e = new Employee(firstName, lastName, nationalId, password,sallary);
+		Employee *e = new Employee(firstName, lastName, nationalId, password, sallary);
+		return e;
 	}
 	//----------------------- REMOVE AN EMPLPYEE
-	void removeEmployee(Employee *e)
+	void deleteEmployee(Employee *e)
 	{
 		delete e;
 	}
-	//---------------------- PRINT EMPLOYEE INFORMATION
-	void printEmployeeInfo(Employee *emp)
-	{
-		// emp->printInfo();
-	}
+
 	//-----------------------PRINT INFORMATION FOR ALL EMPLOYEES
-	void printAllEmployee(vector<Employee> employees)
+	void printAllEmployees(map<int, Employee *> emp)
 	{
-		// for (int i = 0; i < employees.size(); i++)
-		// {
-		// 	printEmployeeInfo(&employees[i]);
-		// }
-	}
-	//-----------------------SEARCH
-	void searchForEmployee()
-	{
-		
+		map<int, Employee *>::iterator it;
+		it = emp.begin();
+		for (it; it != emp.end(); it++)
+		{
+			it->second->printInfo();
+		}
 	}
 };
 

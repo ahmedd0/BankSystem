@@ -4,6 +4,9 @@
 #include <unistd.h>
 #include <string>
 #include "EmployeeSingleton.h"
+#include "AdminSingleton.h"
+#include "EmployeeHelper.h"
+#include "AdminHelper.h"
 using namespace std;
 class BankControl
 {
@@ -30,7 +33,7 @@ public:
             break;
         case 3:
             system("cls");
-            //                    loginAsAdmin();
+            adminScreen();
             system("cls");
             break;
         default:
@@ -44,7 +47,7 @@ public:
     }
     static void clientScreen()
     {
-        Client *singletonClient = ClientSingleton::loginAsClient();
+        Client *singletonClient = ClientSingleton::login();
         system("cls");
         int choice;
         if (singletonClient != NULL)
@@ -61,56 +64,17 @@ public:
                     break;
                 case 2:
                     system("cls");
-                    double withdrawAmount;
-                    cout << "PLEASE ENTER WITHDRAW AMOUNT" << endl;
-                    cin >> withdrawAmount;
-                    if (withdrawAmount > singletonClient->getBalance())
-                    {
-                        system("cls");
-                        cout << "SORRY YOUT BALANCE IS LESS THAN THE RQUIRE AMOUNT" << endl;
-                    }
-                    else
-                    {
-                        singletonClient->withdraw(withdrawAmount);
-                        FileManager::updateClient(singletonClient);
-                        system("cls");
-                        cout << "DONE ! ^_^" << endl;
-                    }
+                    ClientHelper::withdraw(singletonClient);
 
                     break;
                 case 3:
                     system("cls");
-                    cout << "PLEASE ENTER DEPOSITE AMOUNT" << endl;
-                    double depositAmount;
-                    cin >> depositAmount;
-                    singletonClient->deposit(depositAmount);
-                    FileManager::updateClient(singletonClient);
-                    system("cls");
-                    cout << "DONE ! ^_^" << endl;
+                    ClientHelper::deposite(singletonClient);
+
                     break;
                 case 4:
                     system("cls");
-                    cout << "PLEASE ENTER AMOUNT" << endl;
-                    double transferValue;
-                    cin >> transferValue;
-                    cout << "PLEASE ENTER ACCOUNT ID" << endl;
-                    int receiverId;
-                    cin >> receiverId;
-                    Client *receiverClient;
-                    receiverClient = FileManager::searchForClient(receiverId);
-                    if (receiverClient != NULL)
-                    {
-                        singletonClient->transferMoney(transferValue, receiverClient);
-                        FileManager::updateClient(singletonClient);
-                        //FileManager::updateClient(receiverClient);
-                        system("cls");
-                        cout << "DONE ! ^_^" << endl;
-                    }
-                    else
-                    {
-                        system("cls");
-                        cout << "SORRY THERE IS NO CLIENT WITH THIS ID" << endl;
-                    }
+                    ClientHelper::transfer(singletonClient);
 
                     break;
                 case 5:
@@ -146,7 +110,7 @@ public:
     static void employeeScreen()
     {
 
-        Employee *singletonEmployee = EmployeeSingleton::loginAsEmployee();
+        Employee *singletonEmployee = EmployeeSingleton::login();
         int choice;
         if (singletonEmployee != NULL)
         {
@@ -163,111 +127,38 @@ public:
                 case 2:
                 {
                     system("cls");
-                    map<int, Client *> clients = FileManager::getAllClients();
-                    singletonEmployee->printAllClients(clients);
+                    EmployeeHelper<Employee>::printAllClient(singletonEmployee);
                 }
 
                 break;
                 case 3:
                     system("cls");
-                    cout << "PLEASE ENTER ACCOUNT ID" << endl;
-                    int idForSearch;
-                    cin >> idForSearch;
-                    Client *searchResult;
-                    searchResult = FileManager::searchForClient(idForSearch);
-                    if (searchResult != NULL)
-                    {
-                        searchResult->printInfo();
-                    }
-                    else
-                    {
-                        system("cls");
-                        cout << "wrong id" << endl;
-                    }
-
+                    EmployeeHelper<Employee>::searchForClient();
                     break;
                 case 4:
-                    system("cls");
-                    cout << "PLEASE ENTER ACCOUNT ID" << endl;
-                    cin >> idForSearch;
-                    searchResult = FileManager::searchForClient(idForSearch);
-                    singletonEmployee->deactivateClient(searchResult);
+                    EmployeeHelper<Employee>::deactivateClient(singletonEmployee);
+
                     break;
                 case 5:
-                {
-                    system("cls");
-                    cout << "Enter new password: ";
-                    string password;
-                    cin >> password;
-                    singletonEmployee->changePassword(password);
-                    FileManager::updateEmployee(singletonEmployee);
-                    system("cls");
-                    cout << "DONE ! ^_^" << endl;
-                }
+                    EmployeeHelper<Employee>::changePassword(singletonEmployee);
 
-                break;
+                    break;
                 case 6:
-                {
                     system("cls");
-                    Client *client;
-                    string firstName = "";
-                    string lastName;
-                    string nationalId;
-                    string password;
-                    double balance;
-                    cout << "FIRST NAME: ";
-                    cin >> firstName;
-                    cout << endl;
-                    cout << "LAST NAME: ";
-                    cin >> lastName;
-                    cout << endl;
-                    cout << "NATIONAL ID ";
-                    cin >> nationalId;
-                    cout << endl;
-                    cout << "PASSWORD : ";
-                    cin >> password;
-                    cout << endl;
-                    cout << "BALANCE :" << endl;
-                    cin >> balance;
-                    client = singletonEmployee->createClient(firstName, lastName, nationalId, password, balance);
+                    EmployeeHelper<Employee>::createClient(singletonEmployee);
 
-                    client->setId(FileManager::getLastClientId());
-                    FileManager::saveClient(client);
-                    FileManager::UpdateLastClientId();
-                    system("cls");
-                    cout << "DONE ! ^_^" << endl;
-                }
-
-                break;
+                    break;
                 case 7:
-                {
-                    cout << "PLEASE ENTER ID: ";
-                    Client *client;
-                    int id;
-                    cin >> id;
-                    client = FileManager::searchForClient(id);
-                    if (client != NULL)
-                    {
-                        bool isDeleted = FileManager::deleteClient(client);
-                        singletonEmployee->deleteClient(client);
-                        system("cls");
-                        cout << "DONE ! ^_^" << endl;
-                    }
-                    else
-                    {
-                        cout << "CLIENT DOESN't EXIST" << endl;
-                    }
-                }
+                    EmployeeHelper<Employee>::removeClient(singletonEmployee);
 
-                break;
+                    break;
                 case 8:
                     system("cls");
                     BankControl::loginScreen();
                     //EmployeeSingleton::destroyEmployee();
-
                     break;
 
-                    // if Option not 1 ,2 or ... ==> Run the  ption Function Again!
+                // if Option not 1 ,2 or ... ==> Run the  ption Function Again!
                 default:
                     system("cls");
                     cout << "Wrong Choice" << endl;
@@ -276,6 +167,89 @@ public:
                 sleep(2);
                 system("cls");
             } while (choice != 8);
+        }
+        else
+        {
+            system("cls");
+            cout << "WRONG ID OR PASSWORD PLEASE TRY AGAIN" << endl;
+            sleep(1);
+            system("cls");
+            BankControl::loginScreen();
+        }
+    }
+    static void adminScreen()
+    {
+
+        Admin *singletonAdmin = AdminSingleton::login();
+        int choice;
+        if (singletonAdmin != NULL)
+        {
+            do
+            {
+                system("cls");
+                choice = Menu::adminOptions();
+                switch (choice)
+                {
+                case 1:
+                    system("cls");
+                    singletonAdmin->printInfo();
+                    break;
+                case 2:
+                {
+                    system("cls");
+                    AdminHelper<Admin>::printAllClient(singletonAdmin);
+                }
+
+                break;
+                case 3:
+                    system("cls");
+                    AdminHelper<Admin>::searchForClient();
+                    break;
+                case 4:
+                    AdminHelper<Admin>::deactivateClient(singletonAdmin);
+
+                    break;
+                case 5:
+                    AdminHelper<Admin>::changePassword(singletonAdmin);
+
+                    break;
+                case 6:
+                    system("cls");
+                    AdminHelper<Admin>::createClient(singletonAdmin);
+
+                    break;
+                case 7:
+                    AdminHelper<Admin>::removeClient(singletonAdmin);
+                    break;
+                case 8:
+                    system("cls");
+                    AdminHelper<Admin>::printAllEmployees(singletonAdmin);
+                    break;
+                case 9:
+                    system("cls");
+                    AdminHelper<Admin>::searchForEmployee();
+                    break;
+                case 10:
+                    system("cls");
+                    AdminHelper<Admin>::createEmployee(singletonAdmin);
+                    break;
+                case 11:
+                    system("cls");
+                    AdminHelper<Admin>::removeEmployee(singletonAdmin);
+                    break;
+                case 12:
+                    system("cls");
+                    BankControl::loginScreen();
+                    //EmployeeSingleton::destroyEmployee();
+                    break;
+                default:
+                    system("cls");
+                    cout << "Wrong Choice" << endl;
+                    break;
+                }
+                sleep(2);
+                system("cls");
+            } while (choice != 13);
         }
         else
         {

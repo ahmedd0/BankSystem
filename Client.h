@@ -19,9 +19,9 @@ public:
 		isClientActive = true;
 	}
 	//-------------------- PARAMETERIZED CONSTRUCTOR FUNCTION
-	Client(string firstName, string lastName, string nationalId,string password, double balance)
+	Client(string firstName, string lastName, string nationalId, string password, double balance)
 
-		:Person(firstName, lastName, nationalId ,password)
+		: Person(firstName, lastName, nationalId, password)
 	{
 
 		setBalance(balance);
@@ -78,11 +78,11 @@ public:
 
 	void changePassword(string password)
 	{
-
 		this->setPassword(password);
 	}
 	//PRINT INFO
-	void printInfo(){
+	void printInfo()
+	{
 		Person::printInfo();
 		cout << "BALANCE: " << getBalance() << endl;
 		cout << "====================================================================" << endl;
@@ -98,10 +98,6 @@ public:
 	bool isActive()
 	{
 		return isClientActive;
-	}
-	// ------------------- LOGOUT FUNCTION
-	void logout()
-	{
 	}
 };
 

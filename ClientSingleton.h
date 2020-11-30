@@ -3,6 +3,7 @@
 
 #include "FileManager.h"
 #include "Menu.h"
+
 class ClientSingleton
 {
 
@@ -12,7 +13,7 @@ private:
 public:
     ClientSingleton() {}
 
-    static Client *loginAsClient()
+    static Client *login()
     {
         int id;
         string password;

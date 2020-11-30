@@ -26,18 +26,16 @@ public:
              << endl
              << endl
              << endl
-             << endl
-             << endl
-             << endl
              << endl;
-        cout << "                                   ============================================" << endl;
-        cout << "                                   ===                                       ===" << endl;
-        cout << "                                   ===                                       ===" << endl;
-        cout << "                                   ===        Welcome to Bank System         ===" << endl;
-        cout << "                                   ===            ROUTE CYCLE (11)           ===" << endl;
-        cout << "                                   ===                                       ===" << endl;
-        cout << "                                   ===                                       ===" << endl;
-        cout << "                                   ============================================" << endl;
+             
+        cout << "            ============================================" << endl;
+        cout << "            ===                                       ===" << endl;
+        cout << "            ===                                       ===" << endl;
+        cout << "            ===        Welcome to Bank System         ===" << endl;
+        cout << "            ===            ROUTE CYCLE (11)           ===" << endl;
+        cout << "            ===                                       ===" << endl;
+        cout << "            ===                                       ===" << endl;
+        cout << "            ============================================" << endl;
         sleep(3);
         system("cls");
     }
@@ -76,9 +74,9 @@ public:
         int choice;
 
         cout << "(1) PRINT INFO" << endl;
-        cout << "(2) PRINT ALL ACCOUNTS" << endl;
+        cout << "(2) PRINT ALL CLIENTS" << endl;
         cout << "(3) SEARCH FOR AN ACCOUNT" << endl;
-        cout << "(4) DEACTIVATE" << endl;
+        cout << "(4) DEACTIVATE CLIENT" << endl;
         cout << "(5) CHANGE PASSWORD" << endl;
         cout << "(6) CREATE ACCOUNT" << endl;
         cout << "(7) REMOVE ACCOUNT" << endl;
@@ -96,18 +94,20 @@ public:
 
         cout << "(1) PRINT INFO" << endl;
         cout << "(2) PRINT ALL CLIENTS" << endl;
-        cout << "(3) SEARCH FOR AN CLIENT" << endl;
+        cout << "(3) SEARCH FOR AN ACCOUNT" << endl;
         cout << "(4) DEACTIVATE CLIENT" << endl;
         cout << "(5) CHANGE PASSWORD" << endl;
         cout << "(6) CREATE ACCOUNT" << endl;
-        cout << "(7) PRINT ALL EMPLOYEES" << endl;
-        cout << "(8) SEARCH FOR AN EMPLOYEE" << endl;
-        cout << "(9) DEACTIVATE EMPLOYEE" << endl;
+        cout << "(7) REMOVE ACCOUNT" << endl;
+        cout << "(8) PRINT ALL EMPLOYEES" << endl;
+        cout << "(9) SEARCH FOR AN EMPLOYEE" << endl;
         cout << "(10) CREATE EMPLOYEE" << endl;
-        cout << "(11) LOG OUT" << endl;
+		cout << "(11) REMOVE EMPLOYEE" << endl;
+        cout << "(12) LOG OUT" << endl;
+        
 
         cout << "==================================" << endl;
-        cout << "please Insert Option from 1 to 11" << endl;
+        cout << "please Insert Option from 1 to 12" << endl;
         cin >> choice;
         return choice;
     }

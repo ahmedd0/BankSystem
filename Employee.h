@@ -55,10 +55,7 @@ public:
 	{
 		delete client;
 	}
-	//---------------------------- UPDATE CLIENT
-	void updateClient(Client *client)
-	{
-	}
+
 	//------------------------ PRINT ALL CLIENTS INFORMATION
 	void printAllClients(map<int, Client *> emp)
 	{

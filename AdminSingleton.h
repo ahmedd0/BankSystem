@@ -1,18 +1,17 @@
-
-#ifndef BANK_SYSTEM_CLION_EMPLOYEESINGLETON_H
-#define BANK_SYSTEM_CLION_EMPLOYEESINGLETON_H
-#include "Employee.h"
-#include "FileManager.h"
-
-
-class EmployeeSingleton
+#ifndef ADMINSINGLETON_H
+#define ADMINSINGLETON_H
+#include "Admin.h"
+class AdminSingleton
 {
+    // Private section
+
 private:
-    static Employee *instance;
+    static Admin *instance;
 
 public:
-    EmployeeSingleton() {}
-    static Employee *login()
+    AdmintSingleton() {}
+
+    static Admin *login()
     {
         int id;
         string password;
@@ -20,7 +19,8 @@ public:
         cin >> id;
         cout << "Enter your password: ";
         cin >> password;
-        Employee *logged = FileManager::searchForEmployee(id);
+        Admin *logged = FileManager::searchForAdmin(id);
+        ;
         if (logged != NULL)
         {
             if (logged->getPassword() == password)
@@ -37,9 +37,6 @@ public:
             return NULL;
         }
     }
-    static void destroyEmployee()
-    {
-        instance = NULL;
-    }
 };
-#endif //BANK_SYSTEM_CLION_EMPLOYEESINGLETON_H
+
+#endif
