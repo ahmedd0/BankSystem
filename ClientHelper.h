@@ -47,11 +47,17 @@ public:
         receiverClient = FileManager::searchForClient(receiverId);
         if (receiverClient != NULL)
         {
-            singletonClient->transferMoney(transferValue, receiverClient);
+        	if(transferValue<=singletonClient->getBalance()){
+        		singletonClient->transferMoney(transferValue, receiverClient);
             FileManager::updateClient(singletonClient);
-            //FileManager::updateClient(receiverClient);
+            FileManager::updateClient(receiverClient);
             system("cls");
             cout << "DONE ! ^_^" << endl;
+			}else{
+				system("cls");
+				cout<<"SORRY YOUT BALANCE IS LESS THAN THE RQUIRE AMOUNT"<<endl;
+			}
+            
         }
         else
         {
